@@ -1,0 +1,14 @@
+---
+- name: Copying static analysis script to jenkins server
+  copy: 
+    src: files/{{item}}
+    dest: "{{jenkins_path}}/{{item}}"
+  with_items:
+    - package.json
+    - analysis.js
+
+
+- name: Compile Useless Test Detector
+  args:
+    chdir: "{{jenkins_path}}/Tools/UselessTest"
+  shell: mvn compile
